@@ -36,13 +36,15 @@ void LoadLandTable(const char* path, LandTableFormat format, NJS_TEXLIST* texlis
 		PrintDebug("bad path");
 		PrintDebug(path);
 	}
-	landtable->TextureList = texlist;
-	landtable->TextureName = (char*)texname;
+	else {
+		landtable->TextureList = texlist;
+		landtable->TextureName = (char*)texname;
 
 
-	LoadLandManager(landtable);
+		LoadLandManager(landtable);
 
-	LandTableSA2BModels = format == LandTableFormat_SA2B ? true : false;
+		LandTableSA2BModels = format == LandTableFormat_SA2B ? true : false;
+	}
 }
 
 void UnloadLandTable() {
@@ -210,7 +212,7 @@ extern "C"
 		}
 
 		LoadTextureList("MR_SKY00_DC", &PAST01BG_TEXLIST);
-		WriteJump((void*)0x5DD213, DrawSkyBox);
+		WriteJump((ObjectFuncPtr*)0x5DD213, DrawSkyBox);
 		skybox = LoadMDL("past-skybox", ModelFormat_Chunk);
 		
 	}

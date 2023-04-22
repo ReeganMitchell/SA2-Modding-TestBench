@@ -2,6 +2,9 @@
 Testbench/Debug
 Testbench/Release
 Release/
+Blender/
+Mod Folder/
+Textures/
 *.suo
 *.user
 *.sln.docstates
