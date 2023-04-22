@@ -64,6 +64,7 @@ void RumbleRallyStageInit() {
 	LoadStageLight("stg13_light.bin");
 	LoadLevelMusic((char*)"r_hwy.adx");
 	LoadFogData_Fogtask("stg13_fog.bin", (FogData*)0x1A280C8);
+	//LoadStageLight
 	//LoadStageSounds("se_ac_gf.mlt", (void*)0x8A0F60);
 
 	PrintDebug("OtherShit_Loaded");

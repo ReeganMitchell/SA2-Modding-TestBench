@@ -67,7 +67,7 @@ void __cdecl DrawSkyBox(NJS_VECTOR* position) {
 
 	njPushMatrix(0);
 	njTranslate(0, v2->x, 0.0, v2->z);
-	njScale(0, 2.0, 2.0, 2.0);
+	njScale(0, 2.0, 4.0, 2.0);
 	njSetTexture(&PAST01BG_TEXLIST);
 	njScaleV_(&Skybox_Scale);
 	DrawObject(skybox->getmodel());
