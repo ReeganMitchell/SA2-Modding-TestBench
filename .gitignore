@@ -1,7 +1,7 @@
 .vs/
 Testbench/Debug
 Testbench/Release
-Release
+Release/
 *.suo
 *.user
 *.sln.docstates
