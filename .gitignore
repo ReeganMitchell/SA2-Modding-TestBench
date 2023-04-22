@@ -1,6 +1,7 @@
 .vs/
-my-mod/Debug
-my-mod/Release
+Testbench/Debug
+Testbench/Release
+Release
 *.suo
 *.user
 *.sln.docstates
