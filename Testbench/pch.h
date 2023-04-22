@@ -17,4 +17,6 @@
 #include "FunctionHook.h"
 #include "MemAccess.h"
 
+#include "main.h"
+
 #endif //PCH_H
