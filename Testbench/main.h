@@ -5,3 +5,4 @@ extern HelperFunctions HelperFunctionsGlobal;
 
 void InitSkybox(const HelperFunctions& helperFunctions);
 void __cdecl DrawSkyBox(NJS_VECTOR* position);
+LoopHead** GetPaths();

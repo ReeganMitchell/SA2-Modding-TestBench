@@ -77,6 +77,7 @@ void __cdecl DrawSkyBox(NJS_VECTOR* position) {
 	LoadControl3D();
 }
 
+
 void InitSkybox(const HelperFunctions& helperFunctions) {
 	LoadTextureList("MR_SKY00_DC", &PAST01BG_TEXLIST);
 	WriteJump((ObjectFuncPtr*)0x5DD213, DrawSkyBox);
