@@ -48,6 +48,16 @@ void UnloadLandTable() {
 	}
 }
 
+void InitCurrentLevelAndScreenCount_r();
+FunctionHook<void> InitCurrentLevelAndScreenCount_h(InitCurrentLevelAndScreenCount, InitCurrentLevelAndScreenCount_r);
+void InitCurrentLevelAndScreenCount_r() {
+	InitCurrentLevelAndScreenCount_h.Original();
+	if (CurrentLevel == LevelIDs_CityEscape) {
+		LoadStagePaths((LoopHead**)GetPaths());
+	}
+}
+
+
 void RumbleRallyStageInit() {
 
 	LoadTexPacks((TexPackInfo*)0x109E810, (NJS_TEXLIST***)0x109E748);
@@ -123,7 +133,7 @@ extern "C"
 		CityEscapeHeader.Free = RumbleRallyStageDelete; // Runs when the level is exited //Free = anonymous_2?
 		CityEscapeHeader.subprgmanager = RumbleRallyStageOnFrame; // Object that is loaded when your level loads, and destroyed when stage exit is called
 
-		StartPosition startPos = { LevelIDs_CityEscape, 0, 0, 0, { 0,0,0 }, { 0,0,0 }, { 0,0,0 } };
+		StartPosition startPos = { LevelIDs_CityEscape, 0, 0, 0, { 0, 10, -0  }, { 0,0,0 }, { 0,0,0 } };
 
 		for (int i = Characters_Sonic; i != Characters_Chaos + 1; i++) {
 			HelperFunctionsGlobal.RegisterStartPosition(i, startPos);
