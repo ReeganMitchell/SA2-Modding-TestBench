@@ -68,7 +68,7 @@ void RumbleRallyStageInit() {
 
 	PrintDebug("LandTable_Loaded");
 
-	//LoadSetObject(&CityEscape_ObjectList, LoadStageSETFile(NULL, 2048)); // 2048 is the buffer, make it higher if there is a huge lot of objects in your level
+	LoadSetObject(&CityEscape_ObjectList, LoadStageSETFile(NULL, 2048)); // 2048 is the buffer, make it higher if there is a huge lot of objects in your level
 	
 	//PrintDebug("Set_Loaded");
 	LoadStageLight("stg13_light.bin");
