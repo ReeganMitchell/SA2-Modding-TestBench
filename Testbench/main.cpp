@@ -118,9 +118,6 @@ void RumbleRallyStageOnFrame(ObjectMaster* obj) {
 	EntityData1* data = obj->Data1.Entity;
 
 	// Runs every frame in your level, contain a few variables you can use in "data".
-
-	//DrawSkyBox(&data->Position);
-
 }
 
 extern "C"
@@ -141,8 +138,6 @@ extern "C"
 			HelperFunctionsGlobal.RegisterStartPosition(i, startPos);
 			//end position also
 		}
-
-		//InitSkybox(helperFunctions);
 	}
 
 	// Optional.
@@ -154,9 +149,6 @@ extern "C"
 		// For every frame that you're in a level, add 100 points.
 		if (GameState == GameStates_Ingame) {
 			ScoreP1 += 100;
-			if (ScoreP1 > 5000) {
-				
-			}
 		}
 	}
 

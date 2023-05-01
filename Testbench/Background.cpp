@@ -56,13 +56,11 @@ ModelInfo* LoadMDL(const char* name, ModelFormat format) {
 	return temp;
 }
 
-NJS_VECTOR Skybox_Scale = { 10.4f, 10.4f, 10.4f };
+NJS_VECTOR Skybox_Scale = { 10.0f, 10.0f, 10.0f };
 void __cdecl DrawSkyBox(ObjectMaster* obj) {
 	SaveControl3D();
 	OnControl3D(NJD_CONTROL_3D_NO_CLIP_CHECK);
 	OffControl3D(NJD_CONTROL_3D_DEPTH_QUEUE);
-
-	PrintDebug(" Textures? %d", PAST01BG_TEXLIST.nbTexture);
 
 	njPushMatrix(0);
 	njTranslateV(0, &pCameraLocations[CurrentScreen]->pos);
