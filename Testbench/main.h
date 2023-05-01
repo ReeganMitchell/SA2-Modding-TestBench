@@ -4,5 +4,5 @@
 extern HelperFunctions HelperFunctionsGlobal;
 
 void InitSkybox(const HelperFunctions& helperFunctions);
-void __cdecl DrawSkyBox(NJS_VECTOR* position);
+void __cdecl DrawSkyBox(ObjectMaster* obj);
 LoopHead** GetPaths();
