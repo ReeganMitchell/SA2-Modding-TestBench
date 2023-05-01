@@ -2,7 +2,7 @@
 
 ModelInfo* skybox = nullptr;
 
-NJS_TEXNAME PAST01BG_TEXNAME[9]{};
+NJS_TEXNAME PAST01BG_TEXNAME[6]{};
 NJS_TEXLIST PAST01BG_TEXLIST = { arrayptrandlength(PAST01BG_TEXNAME, Uint32) };
 
 const char* ModelFormatStrings[]
@@ -56,18 +56,17 @@ ModelInfo* LoadMDL(const char* name, ModelFormat format) {
 	return temp;
 }
 
-NJS_VECTOR Skybox_Scale = { 1.4f, 1.4f, 1.4f };
-DataPointer(int, playerNum, 0x1DD92A0);
-DataArray(NJS_VECTOR*, CameraPosPtrs, 0x1DD92B0, 2);
-void __cdecl DrawSkyBox(NJS_VECTOR* position) {
-	NJS_VECTOR* v2 = CameraPosPtrs[playerNum];
+NJS_VECTOR Skybox_Scale = { 10.4f, 10.4f, 10.4f };
+void __cdecl DrawSkyBox(ObjectMaster* obj) {
 	SaveControl3D();
 	OnControl3D(NJD_CONTROL_3D_NO_CLIP_CHECK);
 	OffControl3D(NJD_CONTROL_3D_DEPTH_QUEUE);
 
+	PrintDebug(" Textures? %d", PAST01BG_TEXLIST.nbTexture);
+
 	njPushMatrix(0);
-	njTranslate(0, v2->x, 0.0, v2->z);
-	njScale(0, 2.0, 4.0, 2.0);
+	njTranslateV(0, &pCameraLocations[CurrentScreen]->pos);
+	njScale(0, 2.0, 2.0, 2.0);
 	njSetTexture(&PAST01BG_TEXLIST);
 	njScaleV_(&Skybox_Scale);
 	DrawObject(skybox->getmodel());
@@ -79,7 +78,8 @@ void __cdecl DrawSkyBox(NJS_VECTOR* position) {
 
 
 void InitSkybox(const HelperFunctions& helperFunctions) {
-	LoadTextureList("MR_SKY00_DC", &PAST01BG_TEXLIST);
+	LoadTextureList("skybox", &PAST01BG_TEXLIST);
 	WriteJump((ObjectFuncPtr*)0x5DD213, DrawSkyBox);
-	skybox = LoadMDL("past-skybox", ModelFormat_Chunk);
+	skybox = LoadMDL("sky", ModelFormat_Chunk);
+	LoadObject((LoadObj)0, "object_00170858", DrawSkyBox, 1)->DisplaySub = DrawSkyBox;
 }

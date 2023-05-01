@@ -73,7 +73,7 @@ void RumbleRallyStageInit() {
 	//PrintDebug("Set_Loaded");
 	LoadStageLight("stg13_light.bin");
 	LoadLevelMusic((char*)"r_hwy.adx");
-	LoadFogData_Fogtask("stg13_fog.bin", (FogData*)0x1A280C8);
+	//LoadFogData_Fogtask("stg13_fog.bin", (FogData*)0x1A280C8);
 	//LoadStageLight
 	//LoadStageSounds("se_ac_gf.mlt", (void*)0x8A0F60);
 
@@ -93,6 +93,7 @@ void RumbleRallyStageInit() {
 	*(void**)0x1DE468C = (void*)0x6BC4A0;
 
 	PrintDebug("OtherShit_Setup");
+	InitSkybox(HelperFunctionsGlobal);
 	PrintDebug("Init_Done");
 }
 
@@ -118,7 +119,8 @@ void RumbleRallyStageOnFrame(ObjectMaster* obj) {
 
 	// Runs every frame in your level, contain a few variables you can use in "data".
 
-	DrawSkyBox(&data->Position);
+	//DrawSkyBox(&data->Position);
+
 }
 
 extern "C"
@@ -140,7 +142,7 @@ extern "C"
 			//end position also
 		}
 
-		InitSkybox(helperFunctions);
+		//InitSkybox(helperFunctions);
 	}
 
 	// Optional.
@@ -152,6 +154,9 @@ extern "C"
 		// For every frame that you're in a level, add 100 points.
 		if (GameState == GameStates_Ingame) {
 			ScoreP1 += 100;
+			if (ScoreP1 > 5000) {
+				
+			}
 		}
 	}
 
