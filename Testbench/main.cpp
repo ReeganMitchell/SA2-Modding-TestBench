@@ -53,37 +53,22 @@ FunctionHook<void> InitCurrentLevelAndScreenCount_h(InitCurrentLevelAndScreenCou
 void InitCurrentLevelAndScreenCount_r() {
 	InitCurrentLevelAndScreenCount_h.Original();
 	if (CurrentLevel == LevelIDs_CityEscape) {
-		LoadStagePaths((LoopHead**)GetPaths());
+		LoadStagePaths((LoopHead**)GetPaths());//all splines loaded here
 	}
 }
-
-FogData* fogA;
 
 void RumbleRallyStageInit() {
 
 	LoadTexPacks((TexPackInfo*)0x109E810, (NJS_TEXLIST***)0x109E748);
-
-	PrintDebug("Textures_Loaded");
-
 	LoadLandTable("resource\\gd_PC\\level.sa2blvl", LandTableFormat_SA2B, &customlevel_texlist, "textures");
-
-	PrintDebug("LandTable_Loaded");
-
 	LoadSetObject(&CityEscape_ObjectList, LoadStageSETFile(NULL, 2048)); // 2048 is the buffer, make it higher if there is a huge lot of objects in your level
-	
-	//PrintDebug("Set_Loaded");
 	LoadStageLight("stg13_light.bin");
 	LoadLevelMusic((char*)"r_hwy.adx");
 	LoadFogData_Fogtask("stg13_fog.bin", (FogData*)0x1A280C8);
-	//LoadStageLight
 	//LoadStageSounds("se_ac_gf.mlt", (void*)0x8A0F60);
-
-	PrintDebug("OtherShit_Loaded");
-
-	//LoadStagePaths(PathList);
 	//LoadDeathZones(Deathzones);
+	InitSkybox();
 
-	// SA2 allows you to change what happens when rings are lost or itembox are triggered, we use the default ones here
 	DropRingsFunc_ptr = DropRings;
 	DisplayItemBoxItemFunc_ptr = DisplayItemBoxItem;
 
@@ -92,16 +77,12 @@ void RumbleRallyStageInit() {
 	*(void**)0x1DE4684 = (void*)0x6BBAE0;
 	*(void**)0x1DE4688 = (void*)0x6BC450;
 	*(void**)0x1DE468C = (void*)0x6BC4A0;
-
-	PrintDebug("OtherShit_Setup");
-	InitSkybox(HelperFunctionsGlobal);
-	PrintDebug("Init_Done");
 }
 
 void RumbleRallyStageDelete() {
 	FreeTexPacks((NJS_TEXLIST***)0x109E748, (TexPackInfo*)0x109E810);
-
-	UnloadLandTable(); // This unloads your level when the level is exited, saving memory.
+	UnloadLandTable(); 
+	FreeSkybox();
 
 	DropRingsFunc_ptr = nullptr;
 	DisplayItemBoxItemFunc_ptr = nullptr;
@@ -134,10 +115,11 @@ extern "C"
 		CityEscapeHeader.subprgmanager = RumbleRallyStageOnFrame; // Object that is loaded when your level loads, and destroyed when stage exit is called
 
 		StartPosition startPos = { LevelIDs_CityEscape, 0, 0, 0, { 0, 10, -0  }, { 0,0,0 }, { 0,0,0 } };
+		StartPosition endPos = { LevelIDs_CityEscape, 0, 0, 0, { 0, 0, -0  }, { 0,0,0 }, { 0,0,0 } };
 
 		for (int i = Characters_Sonic; i != Characters_Chaos + 1; i++) {
 			HelperFunctionsGlobal.RegisterStartPosition(i, startPos);
-			//end position also
+			HelperFunctionsGlobal.RegisterEndPosition(i, endPos);
 		}
 	}
 
