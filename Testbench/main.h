@@ -3,6 +3,7 @@
 
 extern HelperFunctions HelperFunctionsGlobal;
 
-void InitSkybox(const HelperFunctions& helperFunctions);
+void InitSkybox();
 void __cdecl DrawSkyBox(ObjectMaster* obj);
+void FreeSkybox();
 LoopHead** GetPaths();
